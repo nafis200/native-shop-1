@@ -5,7 +5,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <View>
+    <View style={styles.container}>
        <View>
            <Image source={require('../assets/apps.png')} style={styles.appIconContainer} />
        </View>
@@ -30,6 +30,12 @@ const styles = StyleSheet.create({
         height:40,
         width:40
     },
+    container:{
+        flexDirection:'row',
+        justifyContent:'space-between',
+        alignItems:'center'
+        },
+
 
 
 })
