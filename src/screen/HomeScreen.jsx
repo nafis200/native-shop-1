@@ -11,6 +11,7 @@ import ProductCard from '../components/ProductCard';
 const HomeScreen = () => {
   const categories = ['Tranding Now','All','New','Mens','Womens']
   const [selectedCategory,setSelectedcategory] = useState(null)
+  const [isLiked,setIsLiked] = useState(false)
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
       <Header/>
@@ -34,7 +35,13 @@ const HomeScreen = () => {
        />
           </>
        }
-      data={[1,2,3,4,5,6]} renderItem={ProductCard}/>
+      data={[1,2,3,4,5,6]} renderItem={({item,index})=> <ProductCard item={item} isLiked={isLiked} setIsLiked={setIsLiked}
+      />}
+      showsVerticalScrollIndicator = {false}
+      contentContainerStyle = {{
+         paddingBottom: 150,
+      }}
+      />
       
     </LinearGradient>
   )
