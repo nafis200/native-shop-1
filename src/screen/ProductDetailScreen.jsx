@@ -23,6 +23,20 @@ const ProductDetailScreen = () => {
         <Text style={[styles.title, { color: "black" }]}>Jacket cost</Text>
         <Text style={[styles.price, { color: "black" }]}>$990</Text>
       </View>
+       
+      <Text style={[styles.sizetext,styles.title]}>Size</Text>
+
+      <View style={styles.sizeContainer}>
+        {
+             sizes.map((size,index)=>{
+                return(
+                    <TouchableOpacity style={styles.sizeValueContainer} key={index}>
+                    <Text style={[styles.title,styles.sizeValue]}>{size}</Text>
+                    </TouchableOpacity>
+                )
+             })
+        }
+      </View>
 
 
     </LinearGradient>
@@ -37,7 +51,7 @@ const styles = StyleSheet.create({
       },
       coverimage: {
         width: "100%",
-        height: 420,
+        height: 320,
       },
       HeaderContainer: {
         padding: 20,
@@ -56,6 +70,29 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 20,
       },
+      sizetext: {
+        marginHorizontal: 20,
+        color:'black'
+      },
+      sizeValue: {
+        fontSize: 18,
+      },
+      sizeValueContainer: {
+        height: 36,
+        width: 36,
+        borderRadius: 18,
+        backgroundColor: "white",
+        justifyContent:'center',
+        alignItems:'center'
+      },
+      sizeContainer: {
+        marginHorizontal: 20,
+        flexDirection:'row',
+        gap:10,
+        
+        
+      },
+    
     
     
     
