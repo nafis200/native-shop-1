@@ -11,6 +11,7 @@ const ImageUrl =
   const sizes = ["S", "M", "L", "XL"];
 
 const ProductDetailScreen = () => {
+    const [selectedSize, setSelectedSize] = useState(null);
 
   return (
     <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
@@ -30,8 +31,10 @@ const ProductDetailScreen = () => {
         {
              sizes.map((size,index)=>{
                 return(
-                    <TouchableOpacity style={styles.sizeValueContainer} key={index}>
-                    <Text style={[styles.title,styles.sizeValue]}>{size}</Text>
+                    <TouchableOpacity style={styles.sizeValueContainer} key={index} onPress={()=>{
+                        setSelectedSize(size)
+                    }} >
+                    <Text style={[styles.title,styles.sizeValue, selectedSize === size && {color:'red'}]}>{size}</Text>
                     </TouchableOpacity>
                 )
              })
