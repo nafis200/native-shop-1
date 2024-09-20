@@ -7,9 +7,9 @@ import AntDesign from 'react-native-vector-icons/AntDesign'
 const ProductCard = ({item,isLiked,setIsLiked}) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.coverImage} source={require('../assets/girl1.png')} />
-      <Text style={styles.title}>Jacket Jeans</Text>
-      <Text style={styles.price}>$119.0</Text>
+      <Image style={styles.coverImage} source={{uri: item?.image}} />
+      <Text style={styles.title}>{item?.title}</Text>
+      <Text style={styles.price}>${item.price}</Text>
       <TouchableOpacity onPress={()=>{
             setIsLiked(!isLiked)
       }} style={styles.likeContainer}>

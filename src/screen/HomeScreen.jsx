@@ -8,10 +8,12 @@ import Header from '../components/Header';
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import Category from '../components/Category';
 import ProductCard from '../components/ProductCard';
+import data from '../data/data.json'
 const HomeScreen = () => {
   const categories = ['Tranding Now','All','New','Mens','Womens']
   const [selectedCategory,setSelectedcategory] = useState(null)
   const [isLiked,setIsLiked] = useState(false)
+  const [products,setProducts] = useState(data.products)
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
       <Header/>
@@ -35,7 +37,7 @@ const HomeScreen = () => {
        />
           </>
        }
-      data={[1,2,3,4,5,6]} renderItem={({item,index})=> <ProductCard item={item} isLiked={isLiked} setIsLiked={setIsLiked}
+      data={products} renderItem={({item,index})=> <ProductCard item={item} isLiked={isLiked} setIsLiked={setIsLiked}
       />}
       showsVerticalScrollIndicator = {false}
       contentContainerStyle = {{
