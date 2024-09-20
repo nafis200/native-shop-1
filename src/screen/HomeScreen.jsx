@@ -14,6 +14,20 @@ const HomeScreen = () => {
   const [selectedCategory,setSelectedcategory] = useState(null)
   const [isLiked,setIsLiked] = useState(false)
   const [products,setProducts] = useState(data.products)
+
+  const handleLiked = (item)=>{
+     const newProducts = products.map((prod)=>{
+        if(prod.id === item.id){
+           return {
+             ...prod,
+             isLiked:true
+           }
+        }
+        return prod
+     })
+     setProducts(newProducts)
+  }
+
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
       <Header/>
@@ -37,7 +51,7 @@ const HomeScreen = () => {
        />
           </>
        }
-      data={products} renderItem={({item,index})=> <ProductCard item={item} isLiked={isLiked} setIsLiked={setIsLiked}
+      data={products} renderItem={({item,index})=> <ProductCard item={item} handleLiked={handleLiked}
       />}
       showsVerticalScrollIndicator = {false}
       contentContainerStyle = {{
