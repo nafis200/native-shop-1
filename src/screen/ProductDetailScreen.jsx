@@ -28,7 +28,8 @@ const ProductDetailScreen = () => {
     
 
   return (
-    <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
+     <ScrollView>
+        <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
      <View style={styles.HeaderContainer}>
         <Header />
       </View>
@@ -80,6 +81,7 @@ const ProductDetailScreen = () => {
 
 
     </LinearGradient>
+     </ScrollView>
   );
 };
 
