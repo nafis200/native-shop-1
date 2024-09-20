@@ -3,10 +3,14 @@
 import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useNavigation } from '@react-navigation/native'
 
 const ProductCard = ({item,handleLiked}) => {
+  const navigation = useNavigation()
   return (
-    <View style={styles.container}>
+    <TouchableOpacity onPress={()=>{
+       navigation.navigate("Product_details")
+    }} style={styles.container}>
       <Image style={styles.coverImage} source={{uri: item?.image}} />
       <Text style={styles.title}>{item?.title}</Text>
       <Text style={styles.price}>${item.price}</Text>
@@ -18,7 +22,7 @@ const ProductCard = ({item,handleLiked}) => {
       }
       </TouchableOpacity>
 
-    </View>
+    </TouchableOpacity>
   )
 }
 
