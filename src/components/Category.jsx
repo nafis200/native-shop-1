@@ -19,9 +19,8 @@ const styles = StyleSheet.create({
         // backgroundColor:'#E96E6E',
         backgroundColor:'#938F8F',
         color:'white',
-        padding:20,
-        textAlign:'center',
+        padding:20,        textAlign:'center',
         borderRadius:16,
-        marginHorizontal:10
+        marginHorizontal:10,
     }
 })

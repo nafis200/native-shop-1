@@ -4,15 +4,16 @@ import React, { useState } from 'react'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 const ProductCard = () => {
-  const [isLiked,setIsLiked] = useState(false)
+  const isLiked = true
   return (
     <View style={styles.container}>
       <Image style={styles.coverImage} source={require('../assets/girl1.png')} />
       <Text style={styles.title}>Jacket Jeans</Text>
       <Text style={styles.price}>$119.0</Text>
-    
-      <TouchableOpacity onPress={()=>setIsLiked(!isLiked)} style={styles.likeContainer}>
-      {
+      <TouchableOpacity onPress={()=>{
+
+      }} style={styles.likeContainer}>
+        {
          isLiked? <AntDesign name={"heart"} size={20} color={"red"} /> : <AntDesign name={"hearto"} size={20} color={"red"} />
       }
       </TouchableOpacity>

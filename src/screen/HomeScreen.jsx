@@ -27,12 +27,14 @@ const HomeScreen = () => {
            />
        </View>
        <FlatList data={categories} renderItem={({item})=> <Category item={item} selectedCategory={selectedCategory} setSelectedcategory={setSelectedcategory}/>} keyExtractor={(item)=>item} horizontal={true}
-       showsHorizontalScrollIndicator={false} 
+       showsHorizontalScrollIndicator={false} style={{marginBottom:40}}
        />
-       <View style={{flexDirection:'row',justifyContent:'space-between',columnGap:10}}>
+       {/* <View style={{flexDirection:'row',justifyContent:'space-between',columnGap:10}}>
        <ProductCard/>
        <ProductCard/>
-       </View>
+       </View> */}
+         <FlatList numColumns={2} data={[1,2,3,4,5,6]} renderItem={ProductCard}/>
+      
     </LinearGradient>
   )
 }
