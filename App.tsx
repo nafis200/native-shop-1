@@ -23,7 +23,9 @@ const Home = ()=>{
 
 function MyStack() {
    return (
-     <Stack.Navigator>
+     <Stack.Navigator  screenOptions={{
+      headerShown:false
+   }} >
        <Stack.Screen name="Home_Stack" component={HomeScreen} />
        <Stack.Screen name="Product_details" component={ProductDetailScreen} />
      </Stack.Navigator>
@@ -37,8 +39,8 @@ const App = () => {
     <NavigationContainer>
       <Tab.Navigator 
        screenOptions={{
-          headerShown:false
-       }} 
+         headerShown:false
+      }} 
        >
       <Tab.Screen name="Home" component={MyStack} options={{
            tabBarIcon: ({color,size})=>{
