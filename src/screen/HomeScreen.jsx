@@ -14,9 +14,15 @@ const HomeScreen = () => {
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
       <Header/>
-      <Text style={styles.matchText}>Match Your Style</Text>
-
-      <View style={styles.inputcontainer}>
+       {/* <View style={{flexDirection:'row',justifyContent:'space-between',columnGap:10}}>
+       <ProductCard/>
+       <ProductCard/>
+       </View> */}
+         <FlatList numColumns={2}
+         ListHeaderComponent={
+           <>
+            <Text style={styles.matchText}>Match Your Style</Text>
+            <View style={styles.inputcontainer}>
            <View style={styles.iconContainer}>
            <Fontisto name={"search"} size={26} color={"#C0C0C0"}
            />
@@ -29,11 +35,9 @@ const HomeScreen = () => {
        <FlatList data={categories} renderItem={({item})=> <Category item={item} selectedCategory={selectedCategory} setSelectedcategory={setSelectedcategory}/>} keyExtractor={(item)=>item} horizontal={true}
        showsHorizontalScrollIndicator={false} style={{marginBottom:40}}
        />
-       {/* <View style={{flexDirection:'row',justifyContent:'space-between',columnGap:10}}>
-       <ProductCard/>
-       <ProductCard/>
-       </View> */}
-         <FlatList numColumns={2} data={[1,2,3,4,5,6]} renderItem={ProductCard}/>
+      </>
+       }
+      data={[1,2,3,4,5,6]} renderItem={ProductCard}/>
       
     </LinearGradient>
   )
