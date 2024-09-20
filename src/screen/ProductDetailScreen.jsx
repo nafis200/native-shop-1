@@ -22,18 +22,21 @@ const ImageUrl =
 const ProductDetailScreen = () => {
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
+    const route = useRoute()
 
+    const item = route.params.item 
+    
 
   return (
     <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
      <View style={styles.HeaderContainer}>
         <Header />
       </View>
-      <Image source={{ uri: ImageUrl }} style={styles.coverimage} />
+      <Image source={{ uri: item?.image }} style={styles.coverimage} />
 
       <View style={styles.contentContainer}>
-        <Text style={[styles.title, { color: "black" }]}>Jacket cost</Text>
-        <Text style={[styles.price, { color: "black" }]}>$990</Text>
+        <Text style={[styles.title, { color: "black" }]}>{item.title}</Text>
+        <Text style={[styles.price, { color: "black" }]}>${item.price}</Text>
       </View>
        
       <Text style={[styles.sizetext,styles.title]}>Size</Text>
@@ -88,7 +91,7 @@ const styles = StyleSheet.create({
       },
       coverimage: {
         width: "100%",
-        height: 250,
+        height: 400,
       },
       HeaderContainer: {
         padding: 20,
