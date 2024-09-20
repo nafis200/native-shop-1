@@ -12,7 +12,6 @@ import data from '../data/data.json'
 const HomeScreen = () => {
   const categories = ['Tranding Now','All','New','Mens','Womens']
   const [selectedCategory,setSelectedcategory] = useState(null)
-  const [isLiked,setIsLiked] = useState(false)
   const [products,setProducts] = useState(data.products)
 
   const handleLiked = (item)=>{
