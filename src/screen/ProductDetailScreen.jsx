@@ -1,5 +1,5 @@
 
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import React, { useContext, useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute } from "@react-navigation/native";
@@ -9,9 +9,20 @@ const ImageUrl =
   "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567612/qichw3wrcioebkvzudib.png";
 
   const sizes = ["S", "M", "L", "XL"];
+  const colorArray = [
+    "#FF5733",
+    "#33FF57",
+    "#3357FF",
+    "#F1C40F",
+    "#8E44AD",
+    "#2ECC71",
+  ];
+
 
 const ProductDetailScreen = () => {
     const [selectedSize, setSelectedSize] = useState(null);
+    const [selectedColor, setSelectedColor] = useState(null);
+
 
   return (
     <LinearGradient colors={["#FDF0F3", "#FFFBFC"]} style={styles.container}>
@@ -41,6 +52,29 @@ const ProductDetailScreen = () => {
         }
       </View>
 
+      <Text style={[styles.sizetext,styles.title,{marginVertical:10}]}>Color</Text>
+
+      <View style={styles.colorContainer}>
+        {
+            colorArray.map((color,index)=>{
+                return(
+                    <TouchableOpacity onPress={()=>{
+                        setSelectedColor(color)
+                    }} >
+                       <View style={[styles.circleBorder,selectedColor === color && {borderWidth:1,borderRadius:40}]}>
+                       <View key={index} style={[{backgroundColor:color},styles.circle]} />
+                       </View>
+                    </TouchableOpacity>
+                )
+            })
+        }
+      </View>
+
+      <TouchableOpacity style={styles.button}>
+       <Text style={[{color:'black'},styles.buttonText]}>Add to Cart</Text>
+
+      </TouchableOpacity>
+
 
     </LinearGradient>
   );
@@ -54,7 +88,7 @@ const styles = StyleSheet.create({
       },
       coverimage: {
         width: "100%",
-        height: 320,
+        height: 250,
       },
       HeaderContainer: {
         padding: 20,
@@ -92,9 +126,43 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
         flexDirection:'row',
         gap:10,
-        
-        
       },
+      colorText: {
+        marginHorizontal: 20,
+        marginTop: 10,
+      },
+      circle: {
+        height: 36,
+        width: 36,
+        borderRadius: 18,
+      },
+      colorContainer: {
+        flexDirection: "row",
+        marginHorizontal: 10,
+        gap: 10,
+        marginVertical: 10,
+      },
+      circleBorder: {
+        height: 48,
+        width: 48,
+        borderRadius: 40,
+        alignItems: "center",
+        justifyContent: "center",
+      },
+      buttonText:{
+        fontSize:20,
+        fontWeight:"600",
+        textAlign:'center',
+        color:'white'
+     },
+     button:{
+       backgroundColor:"#E96E6E",
+       padding:20,
+       borderRadius:30,
+       marginHorizontal:10,
+       marginVertical:40
+     }
+   
     
     
     
