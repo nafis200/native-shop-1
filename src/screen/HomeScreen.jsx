@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Fontisto from 'react-native-vector-icons/Fontisto'
 import Category from '../components/Category';
+import ProductCard from '../components/ProductCard';
 const HomeScreen = () => {
   const categories = ['Tranding Now','All','New','Mens','Womens']
   const [selectedCategory,setSelectedcategory] = useState(null)
@@ -25,7 +26,13 @@ const HomeScreen = () => {
            placeholderTextColor="#C0C0C0"
            />
        </View>
-       <FlatList data={categories} renderItem={({item})=> <Category item={item} selectedCategory={selectedCategory} setSelectedcategory={setSelectedcategory}/>} keyExtractor={(item)=>item} horizontal={true} />
+       <FlatList data={categories} renderItem={({item})=> <Category item={item} selectedCategory={selectedCategory} setSelectedcategory={setSelectedcategory}/>} keyExtractor={(item)=>item} horizontal={true}
+       showsHorizontalScrollIndicator={false} 
+       />
+       <View style={{flexDirection:'row',justifyContent:'space-between',columnGap:10}}>
+       <ProductCard/>
+       <ProductCard/>
+       </View>
     </LinearGradient>
   )
 }
