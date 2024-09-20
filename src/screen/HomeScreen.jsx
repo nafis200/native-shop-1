@@ -1,12 +1,15 @@
 
 
-import { StyleSheet, Text, View,TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View,TextInput, FlatList } from 'react-native'
+import React, { useState } from 'react'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Fontisto from 'react-native-vector-icons/Fontisto'
+import Category from '../components/Category';
 const HomeScreen = () => {
+  const categories = ['Tranding Now','All','New','Mens','Womens']
+  const [selectedCategory,setSelectedcategory] = useState(null)
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
       <Header/>
@@ -22,7 +25,7 @@ const HomeScreen = () => {
            placeholderTextColor="#C0C0C0"
            />
        </View>
-
+       <FlatList data={categories} renderItem={({item})=> <Category item={item} selectedCategory={selectedCategory} setSelectedcategory={setSelectedcategory}/>} keyExtractor={(item)=>item} horizontal={true} />
     </LinearGradient>
   )
 }
