@@ -13,6 +13,7 @@ const Cartscreen = () => {
      
      <Header isCart={true} />
      <Cartcard/>
+     <Cartcard/>
     </LinearGradient>
   );
 };
