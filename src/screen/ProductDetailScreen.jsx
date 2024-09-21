@@ -4,6 +4,7 @@ import React, { useContext, useState } from "react";
 import LinearGradient from "react-native-linear-gradient";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Header from "../components/Header";
+import { CartContext } from "../context/CartContext";
 
 const ImageUrl =
   "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567612/qichw3wrcioebkvzudib.png";
@@ -23,9 +24,18 @@ const ProductDetailScreen = () => {
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedColor, setSelectedColor] = useState(null);
     const route = useRoute()
+    const navigation = useNavigation()
 
     const item = route.params.item 
     
+    const {addToCart} = useContext(CartContext)
+
+    const handleAddtoCart = (item)=>{
+            item.size = selectedSize 
+            item.color = selectedColor
+            addToCart(item)
+            navigation.navigate("Cart")
+    }
 
   return (
      <ScrollView>
@@ -74,7 +84,9 @@ const ProductDetailScreen = () => {
         }
       </View>
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity onPress={()=>{
+             handleAddtoCart(item)
+      }} style={styles.button}>
        <Text style={[{color:'black'},styles.buttonText]}>Add to Cart</Text>
 
       </TouchableOpacity>
