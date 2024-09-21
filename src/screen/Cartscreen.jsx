@@ -11,19 +11,20 @@ import { CartContext } from "../context/CartContext";
 
 
 const Cartscreen = () => {
-  const {carts} = useContext(CartContext)
+  const {carts,totalPrice,
+    deleteItemFromCart} = useContext(CartContext)
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
      
      <Header isCart={true} />
      {/* <Cartcard/>
      <Cartcard/> */}
-     <FlatList data={carts} renderItem={({item})=><Cartcard item={item}></Cartcard>} ListFooterComponent={
+     <FlatList data={carts} renderItem={({item})=><Cartcard item={item} deleteItemFromCart={deleteItemFromCart} ></Cartcard>} ListFooterComponent={
          <>        
           <View style={styles.priceContainer}>
 <View style={styles.priceAndTitle}>
 <Text style={[{color:'black'},styles.text]}>Total: </Text>
-<Text style={[{color:'black'},styles.text]}>$155 </Text>
+<Text style={[{color:'black'},styles.text]}>${totalPrice} </Text>
 </View>
 
 <View style={styles.priceAndTitle}>  
@@ -35,7 +36,7 @@ const Cartscreen = () => {
 <View style={styles.divider} />
 <View style={styles.priceAndTitle}>  
 <Text style={[{color:'black'},styles.text]}>Grand Total: </Text>
-<Text style={[{color:'black',fontWeight:'700'},styles.text]}>$100</Text>
+<Text style={[{color:'black',fontWeight:'700'},styles.text]}>${totalPrice}</Text>
 </View>
 
 <TouchableOpacity style={styles.checkoutContainer}>
