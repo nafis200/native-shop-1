@@ -1,6 +1,6 @@
 
 
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
 import React from "react";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../components/Header";
@@ -32,6 +32,10 @@ const Cartscreen = () => {
 <Text style={[{color:'black',fontWeight:'700'},styles.text]}>$100</Text>
 </View>
 
+<TouchableOpacity style={styles.checkoutContainer}>
+<Text style={[{color:'black'},styles.buttonText]}>Checkout</Text>    
+</TouchableOpacity>
+
     </LinearGradient>
   );
 };
@@ -57,6 +61,18 @@ const styles = StyleSheet.create({
         borderColor:"#C0C0C0",
         marginTop:5,
         marginBottom:5
+    },
+    buttonText:{
+        fontSize:18,
+        color:"white",
+        textAlign:'center',
+        padding:10
+    },
+    checkoutContainer:{
+        backgroundColor:"red",
+        width:"100%",
+        marginVertical:40,
+        borderRadius:20,
     },
 
 
