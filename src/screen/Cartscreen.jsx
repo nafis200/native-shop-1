@@ -10,7 +10,7 @@ const Cartscreen = () => {
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
      
-     <Header/>
+     <Header isCart={true} />
  
     </LinearGradient>
   );

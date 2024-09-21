@@ -1,14 +1,21 @@
 
 
-import { StyleSheet, Text, View,Image } from 'react-native'
+import { StyleSheet, Text, View,Image,TouchableOpacity } from 'react-native'
 import React from 'react'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+import { useNavigation } from '@react-navigation/native'
 
-const Header = () => {
+const Header = ({isCart}) => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
-       <View>
-           <Image source={require('../assets/apps.png')} style={styles.appIconContainer} />
-       </View>
+       <TouchableOpacity onPress={()=>{
+           navigation.navigate("Home")
+       }}>
+          {
+            isCart ? <Ionicons name={"chevron-back"} color={"red"} size={30} /> :  <Image source={require('../assets/apps.png')} style={styles.appIconContainer}/>
+          }
+       </TouchableOpacity>
        <Image source={require("../assets/Ellipse2.png")} style={styles.appIcon} />
 
     </View>
