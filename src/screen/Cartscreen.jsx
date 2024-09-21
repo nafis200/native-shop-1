@@ -1,6 +1,6 @@
 
 
-import { StyleSheet, Text, View,TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View,TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import LinearGradient from 'react-native-linear-gradient'
 import Header from "../components/Header";
@@ -12,9 +12,11 @@ const Cartscreen = () => {
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
      
      <Header isCart={true} />
-     <Cartcard/>
-     <Cartcard/>
-<View style={styles.priceContainer}>
+     {/* <Cartcard/>
+     <Cartcard/> */}
+     <FlatList data={[1,2,3,4,5,6]} renderItem={Cartcard} ListFooterComponent={
+         <>        
+          <View style={styles.priceContainer}>
 <View style={styles.priceAndTitle}>
 <Text style={[{color:'black'},styles.text]}>Total: </Text>
 <Text style={[{color:'black'},styles.text]}>$155 </Text>
@@ -35,6 +37,8 @@ const Cartscreen = () => {
 <TouchableOpacity style={styles.checkoutContainer}>
 <Text style={[{color:'black'},styles.buttonText]}>Checkout</Text>    
 </TouchableOpacity>
+         </>
+     } />
 
     </LinearGradient>
   );
