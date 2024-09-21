@@ -16,6 +16,9 @@ const Header = ({isCart}) => {
             isCart ? <Ionicons name={"chevron-back"} color={"red"} size={30} /> :  <Image source={require('../assets/apps.png')} style={styles.appIconContainer}/>
           }
        </TouchableOpacity>
+       {
+       isCart && <Text style={[{color:'black'},styles.mycart]}>My cart</Text>
+     }
        <Image source={require("../assets/Ellipse2.png")} style={styles.appIcon} />
 
     </View>
@@ -42,6 +45,9 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
         alignItems:'center'
         },
+        mycart:{
+          fontSize: 28,
+        }
 
 
 
