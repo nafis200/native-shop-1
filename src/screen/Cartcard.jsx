@@ -5,19 +5,21 @@ import React from "react";
 import FontAwesome6 from "react-native-vector-icons/FontAwesome6";
 const ImageUrl =
   "https://res.cloudinary.com/dlc5c1ycl/image/upload/v1710567612/qichw3wrcioebkvzudib.png";
-const Cartcard = () => {
+const Cartcard = ({item}) => {
+  console.log(item);
+  
   return (
     <View style={styles.container}>
-      <Image  source={{uri: ImageUrl}} style={[styles.coverImage]} />
+      <Image  source={{uri: item?.image}} style={[styles.coverImage]} />
 
       <View style={styles.cardContent}>
-        <Text style={styles.title}>Jacket Jeans</Text>
-        <Text style={styles.price}>$37.9</Text>
+        <Text style={styles.title}>{item?.title}</Text>
+        <Text style={styles.price}>${item?.price}</Text>
         <View style={styles.circleSizeContainer}>
-          <View style={styles.circle}
+          <View style={[styles.circle,{backgroundColor: item?.color}]}
           />
           <View style={styles.sizeCircle}>
-            <Text style={{color:'black',fontSize:18}}>L</Text>
+            <Text style={{color:'black',fontSize:18}}>{item.size}</Text>
           </View>
         </View>
           
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
     height: 32,
     width: 32, 
     borderRadius: 20, 
-    backgroundColor:'#7094C1',
+    // backgroundColor:'#7094C1',
     marginTop:20
 },
 sizeCircle:{
