@@ -6,27 +6,22 @@ import {
     TouchableOpacity,
     Alert,
   } from 'react-native';
-  import React, {useState} from 'react';
-  import auth from '@react-native-firebase/auth';  
+  import React, {useContext, useState} from 'react';
+  import { AuthContext } from '../components/provider/Authprovider';
   const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const onRegister = () => {
-        auth()
-          .createUserWithEmailAndPassword(email, password)
-          .then(() => {
-            Alert.alert('User account created!');
-          })
-          .catch(error => {
-            if (error.code === 'auth/email-already-in-use') {
-              Alert.alert('That email address is already in use!');
-            }
-            if (error.code === 'auth/invalid-email') {
-              Alert.alert('That email address is invalid!');
-            }
-            // Alert.alert(`${error}`);
-          });
-      };
+    const {createUser} = useContext(AuthContext)
+    const onRegister = async() => {
+        try{
+          await createUser(email,password)
+          console.log("successfully register");
+        } 
+        catch(error){
+           console.log('Registration Error',error);
+           
+        }
+    };
     return (
         <View style={styles.container}>
         <Text style={styles.signup}>Sign Up Screen</Text>

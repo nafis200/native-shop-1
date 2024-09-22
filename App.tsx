@@ -14,6 +14,7 @@ import Cartscreen from './src/screen/Cartscreen';
 import { CartContext, CartProvider } from './src/context/CartContext';
 import Login from './src/screen/Login';
 import Signup from './src/screen/Signup';
+import Authprovider from './src/components/provider/Authprovider';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -40,7 +41,8 @@ function MyStack() {
 
 const App = () => {
   return (
-    <CartProvider>
+    <Authprovider>
+      <CartProvider>
       <NavigationContainer>
       <Tab.Navigator 
        screenOptions={{
@@ -92,6 +94,7 @@ const App = () => {
     </Tab.Navigator>
     </NavigationContainer>
     </CartProvider>
+    </Authprovider>
   )
 }
 
