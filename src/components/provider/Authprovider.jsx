@@ -8,7 +8,11 @@ const Authprovider = ({children}) => {
   const [loading, setLoading] = useState(true);
   const createUser = async (email, password) => {
     try {
-      await auth().createUserWithEmailAndPassword(email, password);
+      await auth().createUserWithEmailAndPassword(email, password)
+      .then((result)=>{
+         console.log(result);
+         
+      })
     } catch (error) {
       console.error('Registration Error:', error);
       throw error;

@@ -8,11 +8,16 @@ import LinearGradient from 'react-native-linear-gradient'
 import Header from "../components/Header";
 import Cartcard from "./Cartcard";
 import { CartContext } from "../context/CartContext";
+import { AuthContext } from "../components/provider/Authprovider";
 
 
 const Cartscreen = () => {
   const {carts,totalPrice,
     deleteItemFromCart} = useContext(CartContext)
+    const {user} = useContext(AuthContext)
+    console.log("user",user);
+    
+    
   return (
     <LinearGradient colors={['#FDF0F3','#FFFBFC']} style={styles.conatiner}>
      
