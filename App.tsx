@@ -12,6 +12,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProductDetailScreen from './src/screen/ProductDetailScreen';
 import Cartscreen from './src/screen/Cartscreen';
 import { CartContext, CartProvider } from './src/context/CartContext';
+import Login from './src/screen/Login';
+import Signup from './src/screen/Signup';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
@@ -82,7 +84,7 @@ const App = () => {
               )
            }
         }} />
-      <Tab.Screen name="Account" component={Home} options={{
+      <Tab.Screen name="Account" component={Signup} options={{
            tabBarIcon:({color,size,focused})=>{
               return <FontAwesome6 name={'user'} color={"red"} size={size} />
            }
