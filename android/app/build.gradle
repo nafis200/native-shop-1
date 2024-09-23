@@ -53,6 +53,12 @@ android {
 dependencies {
     implementation("com.facebook.react:react-android")
     implementation project(':react-native-vector-icons')
+
+    // new
+    implementation 'com.google.android.gms:play-services-auth:20.0.0'
+    implementation 'com.google.android.gms:play-services-base:17.6.0'
+   //    
+
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
     } else {

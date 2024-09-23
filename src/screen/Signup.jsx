@@ -15,7 +15,16 @@ import { AuthContext } from '../components/provider/Authprovider';
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const {createUser,logout} = useContext(AuthContext);
+  const {createUser,logout,signInUser,signInWithGoogle} = useContext(AuthContext);
+
+  const handleLogin = async () => {
+    try {
+      await signInUser(email, password);
+      console.log('User logged in successfully');
+    } catch (error) {
+      console.log('Login Error:', error);
+    }
+  };
 
   const handleLogout = async () => {
     try {
@@ -42,7 +51,8 @@ const Signup = () => {
             { text: "OK", onPress: () => console.log("OK Pressed") } 
           ]
         );
-        RNRestart.Restart(); 
+        // RNRestart.Restart(); 
+        handleLogout()
       }
     } 
     catch (error) {
@@ -71,6 +81,12 @@ const Signup = () => {
       </TouchableOpacity>
       <TouchableOpacity onPress={ handleLogout} style={styles.register}>
         <Text style={styles.registerTitle}>Logout</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={handleLogin} style={styles.register}>
+        <Text style={styles.registerTitle}>LogIn</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={signInWithGoogle} style={styles.register}>
+        <Text style={styles.registerTitle}>Google</Text>
       </TouchableOpacity>
     </View>
   );

@@ -15,8 +15,13 @@ import { CartContext, CartProvider } from './src/context/CartContext';
 import Login from './src/screen/Login';
 import Signup from './src/screen/Signup';
 import Authprovider from './src/components/provider/Authprovider';
+import {
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
+const queryClient = new QueryClient()
 
 const Home = ()=>{
    return(
@@ -42,6 +47,7 @@ function MyStack() {
 const App = () => {
   return (
     <Authprovider>
+      <QueryClientProvider client={queryClient}>
       <CartProvider>
       <NavigationContainer>
       <Tab.Navigator 
@@ -94,6 +100,7 @@ const App = () => {
     </Tab.Navigator>
     </NavigationContainer>
     </CartProvider>
+      </QueryClientProvider>
     </Authprovider>
   )
 }

@@ -9,13 +9,39 @@ import Header from "../components/Header";
 import Cartcard from "./Cartcard";
 import { CartContext } from "../context/CartContext";
 import { AuthContext } from "../components/provider/Authprovider";
-
+import useAxiospublic from "../components/hooks/useAxiospublic";
+import { useQuery } from "@tanstack/react-query";
 
 const Cartscreen = () => {
   const {carts,totalPrice,
     deleteItemFromCart} = useContext(CartContext)
     const {user} = useContext(AuthContext)
-    console.log("user",user);
+    
+    const axiosSecure = useAxiospublic()
+    
+    const {data: userx = []} = useQuery({
+        queryKey:['menu'],
+        queryFn:async()=>{
+            const res = await axiosSecure.get(`/users`)
+            return res.data
+        } 
+    })
+   
+    console.log("tanstack query",userx);
+    
+
+
+   axiosSecure.get(`/totalvotes`)
+  .then((res) => {
+    console.log(res.data);
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
+  });
+
+    
+    
+
     
     
   return (
@@ -46,6 +72,7 @@ const Cartscreen = () => {
 
 <TouchableOpacity style={styles.checkoutContainer}>
 <Text style={[{color:'black'},styles.buttonText]}>Checkout</Text>    
+<Text style={[{color:'black'},styles.buttonText]}>{userx?.length}</Text>    
 </TouchableOpacity>
          </>
      } />
