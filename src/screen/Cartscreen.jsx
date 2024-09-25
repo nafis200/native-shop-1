@@ -1,5 +1,5 @@
-import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
-import React, {useContext, useState} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity, FlatList, Alert} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Cartcard from './Cartcard';
@@ -9,34 +9,69 @@ import useAxiospublic from '../components/hooks/useAxiospublic';
 import {useQuery} from '@tanstack/react-query';
 import Payment from './Payment';
 
-import {CardForm, StripeProvider} from '@stripe/stripe-react-native';
+import {CardForm, StripeProvider, useConfirmPayment} from '@stripe/stripe-react-native';
+import axios from 'axios';
 
 const Cartscreen = () => {
   const {carts, totalPrice, deleteItemFromCart} = useContext(CartContext);
+  const {confirmPayment, loading} = useConfirmPayment()
   const {user} = useContext(AuthContext);
 
   const [isReady,setIsReady] = useState(false)
 
+
   const axiosSecure = useAxiospublic();
+  
+  console.log(user?.email);
+  
+  // const {data: userx = []} = useQuery({
+  //   queryKey: ['menu'],
+  //   queryFn: async () => {
+  //     const res = await axiosSecure.get(`/users`);
+  //     return res.data;
+  //   },
+  // });
 
-  const {data: userx = []} = useQuery({
-    queryKey: ['menu'],
-    queryFn: async () => {
-      const res = await axiosSecure.get(`/users`);
-      return res.data;
-    },
-  });
+  // console.log('tanstack query', userx);
 
-  console.log('tanstack query', userx);
-
-  axiosSecure
-    .get(`/totalvotes`)
-    .then(res => {
-      console.log(res.data);
-    })
-    .catch(error => {
-      console.error('Error fetching data:', error);
+  // axiosSecure
+  //   .get(`/totalvotes`)
+  //   .then(res => {
+  //     console.log(res.data);
+  //   })
+  //   .catch(error => {
+  //     console.error('Error fetching data:', error);
+  //   });
+    
+  const fetchPaymentIntent = async () => {
+    console.log("Fetching Payment Intent...");
+    try {
+      const response = await axios.post('http://192.168.0.112:5000/create-payment-intent', {
+        price: 1000,
+        email: user?.email
+      });
+      return response.data.clientSecret;
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+    
+  const handlePayment = async () => {
+    const clientSecret = await fetchPaymentIntent();
+    if (!clientSecret) {
+      Alert.alert("Error", "Payment Intent could not be created. Please try again.");
+      return;
+    }
+    const {error, paymentIntent} = await confirmPayment(clientSecret, {
+      paymentMethodType: 'Card'
     });
+    if (error) {
+      Alert.alert('Error occurred with your payment', error.localizedMessage);
+    } else if (paymentIntent) {
+      Alert.alert("Success", "The payment was confirmed successfully!");
+    }
+  }
+  
 
   return (
     <LinearGradient colors={['#FDF0F3', '#FFFBFC']} style={styles.conatiner}>
@@ -78,9 +113,6 @@ const Cartscreen = () => {
               <Text style={[{color: 'black'}, styles.buttonText]}>
                 Checkout
               </Text>
-              <Text style={[{color: 'black'}, styles.buttonText]}>
-                {userx?.length}
-              </Text>
             </TouchableOpacity>
 
             <StripeProvider
@@ -97,11 +129,15 @@ const Cartscreen = () => {
                 }}
                 placeholderTextColor='white' 
                 postalCodeEnabled={true}
-                
+                onFormComplete={()=>{
+                   setIsReady(true)
+                }}
               />
             </StripeProvider>
 
-            <TouchableOpacity style={[styles.checkoutContainer,!isReady && {opacity:0.5}]} disabled ={!isReady}>
+            <TouchableOpacity onPress={async()=>{
+              await handlePayment()
+            }} style={[styles.checkoutContainer,(!isReady || loading) && {opacity:0.5}]} disabled = {!isReady || loading}>
               <Text style={[{color: 'black'}, styles.buttonText]}>
                 Pay
               </Text>
@@ -149,7 +185,8 @@ const styles = StyleSheet.create({
     borderRadius: 20,
   },
   cardform: {
-    height: 280,
+    height: 300,
     color: 'black',
+    marginVertical:10
   },
 });
