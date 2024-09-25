@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, TouchableOpacity, FlatList} from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Cartcard from './Cartcard';
@@ -14,6 +14,8 @@ import {CardForm, StripeProvider} from '@stripe/stripe-react-native';
 const Cartscreen = () => {
   const {carts, totalPrice, deleteItemFromCart} = useContext(CartContext);
   const {user} = useContext(AuthContext);
+
+  const [isReady,setIsReady] = useState(false)
 
   const axiosSecure = useAxiospublic();
 
@@ -89,8 +91,8 @@ const Cartscreen = () => {
                 style={styles.cardform}
                 cardStyle={{
                   backgroundColor: '#708090', 
-                  textColor: 'white', // Text color inside input fields
-                  borderColor: '#cccccc', // Border color of the card input fields
+                  textColor: 'white', 
+                  borderColor: '#cccccc', 
                   borderRadius: 5,
                 }}
                 placeholderTextColor='white' 
@@ -98,6 +100,14 @@ const Cartscreen = () => {
                 
               />
             </StripeProvider>
+
+            <TouchableOpacity style={[styles.checkoutContainer,!isReady && {opacity:0.5}]} disabled ={!isReady}>
+              <Text style={[{color: 'black'}, styles.buttonText]}>
+                Pay
+              </Text>
+            </TouchableOpacity>
+            
+
           </>
         }
       />
