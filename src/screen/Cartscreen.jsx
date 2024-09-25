@@ -42,7 +42,7 @@ const Cartscreen = () => {
   //   .catch(error => {
   //     console.error('Error fetching data:', error);
   //   });
-    
+  //  
   const fetchPaymentIntent = async () => {
     console.log("Fetching Payment Intent...");
     try {
