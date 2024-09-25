@@ -8,8 +8,10 @@ import {AuthContext} from '../components/provider/Authprovider';
 import useAxiospublic from '../components/hooks/useAxiospublic';
 import {useQuery} from '@tanstack/react-query';
 import Payment from './Payment';
+import { Linking } from 'react-native';
 
 import {CardForm, StripeProvider, useConfirmPayment} from '@stripe/stripe-react-native';
+import { WebView } from 'react-native-webview';
 import axios from 'axios';
 
 const Cartscreen = () => {
@@ -18,6 +20,8 @@ const Cartscreen = () => {
   const {user} = useContext(AuthContext);
 
   const [isReady,setIsReady] = useState(false)
+
+  const [url,setUrl] = useState(null)
 
 
   const axiosSecure = useAxiospublic();
@@ -82,6 +86,29 @@ const Cartscreen = () => {
       // insert database information
     }
   };
+
+  const sslcomerce = async()=>{
+      axios.post('http://192.168.0.112:5000/sslComerece',{
+         amount: 100,
+      })
+      .then(res =>{
+         console.log(res.data.paymentUrl);
+         if(res.data){
+          const url = res.data.paymentUrl;
+          Linking.canOpenURL(url)
+            .then((supported) => {
+              if (supported) {
+                // Open the URL
+                Linking.openURL(url);
+              } else {
+                console.log(`Can't open this URL: ${url}`);
+              }
+            })
+            .catch((err) => console.error('An error occurred', err));
+         }
+      })
+
+  }
   
 
   return (
@@ -153,7 +180,14 @@ const Cartscreen = () => {
                 Pay
               </Text>
             </TouchableOpacity>
-            
+             
+            <TouchableOpacity onPress={async()=>{
+              await sslcomerce()
+            }} style={styles.checkoutContainer}>
+              <Text style={[{color: 'black'}, styles.buttonText]}>
+                SslComerece
+              </Text>
+            </TouchableOpacity>
 
           </>
         }
