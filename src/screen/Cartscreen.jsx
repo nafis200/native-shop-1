@@ -22,7 +22,7 @@ const Cartscreen = () => {
 
   const axiosSecure = useAxiospublic();
   
-  console.log(user?.email);
+  console.log(user);
   
   // const {data: userx = []} = useQuery({
   //   queryKey: ['menu'],
@@ -61,16 +61,27 @@ const Cartscreen = () => {
     if (!clientSecret) {
       Alert.alert("Error", "Payment Intent could not be created. Please try again.");
       return;
+    } else {
+      Alert.alert("taka is cutting");
     }
+  
     const {error, paymentIntent} = await confirmPayment(clientSecret, {
-      paymentMethodType: 'Card'
+      paymentMethodType: 'Card',
+      paymentMethodData: {
+        billingDetails: {
+          email: user?.email || 'anonymous',
+          name: user?.displayName || 'anonymous',
+        },
+      },
     });
+  
     if (error) {
       Alert.alert('Error occurred with your payment', error.localizedMessage);
     } else if (paymentIntent) {
       Alert.alert("Success", "The payment was confirmed successfully!");
+      // insert database information
     }
-  }
+  };
   
 
   return (
